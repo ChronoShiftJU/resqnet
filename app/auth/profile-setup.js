@@ -1,82 +1,100 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Text, Button, Divider } from 'react-native-paper';
 
 export default function ProfileSetupScreen() {
-  const router = useRouter();
-  const [medicalRecords, setMedicalRecords] = useState([]);
-  const [emergencyContacts, setEmergencyContacts] = useState([]);
+    const router = useRouter();
+    const [medicalRecords, setMedicalRecords] = useState([]);
+    const [emergencyContacts, setEmergencyContacts] = useState([]);
 
-  const handleAddMedicalRecord = () => {
-    // Logic to upload medical record
-    setMedicalRecords([...medicalRecords, 'New Medical Record']);
-  };
+    const handleAddMedicalRecord = () => {
+        setMedicalRecords([...medicalRecords, `Medical Record ${medicalRecords.length + 1}`]);
+    };
 
-  const handleAddContact = () => {
-    // Logic to add emergency contact
-    setEmergencyContacts([...emergencyContacts, 'New Contact']);
-  };
+    const handleAddContact = () => {
+        setEmergencyContacts([...emergencyContacts, `Contact ${emergencyContacts.length + 1}`]);
+    };
 
-  const handleSave = () => {
-    // Save profile setup and navigate to Home
-    router.push('/home');
-  };
+    const handleSave = () => {
+        router.push('/home');
+    };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Complete Your Profile</Text>
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Complete Your Profile</Text>
 
-      <Text style={styles.sectionTitle}>Medical Records</Text>
-      <Button title="Upload Medical Record" onPress={handleAddMedicalRecord} />
-      {medicalRecords.length === 0 ? (
-        <Text style={styles.noDataText}>No Records</Text>
-      ) : (
-        <FlatList
-          data={medicalRecords}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Text>{item}</Text>}
-        />
-      )}
+            <Button mode="contained" onPress={handleAddMedicalRecord} style={styles.button}>
+                Upload Medical Record
+            </Button>
+            <View style={styles.itemsContainer}>
 
-      <Text style={styles.sectionTitle}>Emergency Contacts</Text>
-      <Button title="Add Contact" onPress={handleAddContact} />
-      {emergencyContacts.length === 0 ? (
-        <Text style={styles.noDataText}>No Contacts</Text>
-      ) : (
-        <FlatList
-          data={emergencyContacts}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Text>{item}</Text>}
-        />
-      )}
+                {medicalRecords.length === 0 ? (
+                    <Text style={styles.noDataText}>No Records</Text>
+                ) : (
+                    <FlatList
+                        data={medicalRecords}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item }) => <Text style={styles.listItem}>{item}</Text>}
+                        ItemSeparatorComponent={Divider}
+                    />
+                )}
 
-      <Button title="Save & Go to Home" onPress={handleSave} style={styles.saveButton} />
-    </View>
-  );
+            </View>
+
+
+            <Button mode="contained" onPress={handleAddContact} style={styles.button}>
+                Add Emergency Contact
+            </Button>
+            <View style={styles.itemsContainer}>
+
+                {emergencyContacts.length === 0 ? (
+                    <Text style={styles.noDataText}>No Contacts</Text>
+                ) : (
+                    <FlatList
+                        data={emergencyContacts}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item }) => <Text style={styles.listItem}>{item}</Text>}
+                        ItemSeparatorComponent={Divider}
+                    />
+                )}
+            </View>
+            <Button mode="contained" onPress={handleSave} style={styles.button}>
+                Save & Go to Home
+            </Button>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f8f9fa',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 10,
-  },
-  noDataText: {
-    color: '#6c757d',
-    marginVertical: 5,
-  },
-  saveButton: {
-    marginTop: 20,
-  },
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#f8f9fa',
+    },
+    title: {
+        marginBottom: 20,
+        textAlign: 'center',
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+    button: {
+        marginBottom: 10,
+    },
+    itemsContainer: {
+        flex: 1,
+        borderWidth: 1,
+        borderRadius: 20,
+        borderColor: '#999',
+        padding: 10,
+        marginBottom: 15,
+    },
+    noDataText: {
+        textAlign: 'center',
+        color: '#6c757d',
+    },
+    listItem: {
+        fontSize:14,
+        padding: 8,
+    }
 });
