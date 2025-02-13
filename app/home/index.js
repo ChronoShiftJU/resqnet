@@ -1,15 +1,49 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, Button, Appbar, Card, Avatar } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 
-export default function WelcomeScreen() {
+export default function HomeScreen() {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home page</Text>
-      <Text style={styles.tagline}>all main actions here - to be added</Text>
-      <Button title="profile settings" onPress={() => router.push('/profile-settings')} />
+      <Appbar.Header>
+        <Appbar.Content title="ResQNet" />
+      </Appbar.Header>
+
+      <TouchableOpacity style={styles.sosButton} onPress={() => router.push('/sos/self')}>
+        <Card style={styles.sosCard}>
+          <Card.Title
+            title="SOS Self"
+            left={(props) => <Avatar.Icon {...props} icon="account-alert" />}
+          />
+          <Card.Content>
+            <Text style={styles.sosText}>Activate SOS for Self</Text>
+          </Card.Content>
+        </Card>
+      </TouchableOpacity>
+
+      <Card style={styles.card}>
+        <Card.Title
+          title="SOS Others"
+          left={(props) => <Avatar.Icon {...props} icon="account-group" />}
+        />
+        <Card.Content>
+          <Button mode="outlined" onPress={() => router.push('/sos/others')} style={styles.button}>
+            Help Someone Else
+          </Button>
+        </Card.Content>
+      </Card>
+
+      {/* <Text style={styles.status}>Status: All Systems Normal</Text> */}
+
+      <Appbar style={styles.bottomNav}>
+        <Appbar.Action icon="home" onPress={() => router.push('/home')} />
+        <Appbar.Action icon="account" onPress={() => router.push('/profile')} />
+        <Appbar.Action icon="history" onPress={() => router.push('/history')} />
+        <Appbar.Action icon="cog" onPress={() => router.push('/settings')} />
+      </Appbar>
     </View>
   );
 }
@@ -17,19 +51,46 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#f8f9fa',
-    padding: 20,
+    // backgroundColor: 'grey',
   },
-  title: {
-    fontSize: 36,
+  sosButton: {
+    flex: 1,
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
+  sosCard: {
+    flex: 1,
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#ff4d4d',
+  },
+  sosText: {
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: '#fff',
+    textAlign: 'center',
   },
-  tagline: {
-    fontSize: 18,
+  card: {
+    flex:1,
+    marginHorizontal: 20,
+    marginVertical: 5,
+    borderRadius: 10,
+  },
+  button: {
+    marginTop: 10,
+  },
+  status: {
+    textAlign: 'center',
+    marginVertical: 20,
     color: '#6c757d',
-    marginBottom: 30,
+  },
+  bottomNav: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#ffffff',
+    justifyContent: 'space-around',
   },
 });
