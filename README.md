@@ -2,6 +2,22 @@
 
 ResQNet is a React Native application designed to provide immediate emergency assistance for both individuals and bystanders. Built using Expo and expo-router, ResQNet aims to streamline emergency responses through quick SOS activations, medical record management, and real-time communication with paramedics.
 
+## System Overview
+
+ResQNet is part of a comprehensive emergency response system comprising three applications:
+
+1. **User App (ResQNet):** This mobile application enables individuals to send SOS alerts, manage medical records, and communicate with paramedics.
+2. **Ambulance/Paramedic App:** A dedicated mobile application for paramedics to receive SOS alerts, navigate to the scene, and communicate with patients.
+3. **Hospital Dashboard Website:** A web-based dashboard for hospitals to monitor incoming SOS cases, manage patient data, and coordinate emergency responses.
+
+### Related Documentation & Repositories
+
+- [Full System Workflow Documentation](https://drive.google.com/file/d/1DJB59ix9WUSUfab-ajpdImURwLWaTkiy/view)
+- [Project Presentation](https://drive.google.com/drive/folders/1raMnEMOWAjBdKV_Pe71hgRez13r0FOgT)
+- Ambulance/Paramedic App GitHub Repository - _(to be added)_
+- Hospital Dashboard Website GitHub Repository - _(to be added)_
+- Complete Wireframes for the System - _(to be added)_
+
 ## Hackathon Submission
 - **Event:** SparkHack at Techfest "Convolution X"
 - **Team Name:** ChronoShift
@@ -17,9 +33,9 @@ ResQNet is a React Native application designed to provide immediate emergency as
 
 Follow these steps to set up the project locally:
 
-```bash
+```console
 # Clone the repository
-git clone https://github.com/your-username/resqnet.git
+git clone https://github.com/ChronoShiftJU/resqnet.git
 
 # Navigate into the project directory
 cd resqnet
@@ -125,7 +141,7 @@ npx expo start
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
 
